@@ -1,0 +1,20 @@
+# System files
+.DS_Store
+
+# CLion / CMake build directories
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Binaries and debug files
+exec
+*.dSYM/
+
+# JetBrains project config
+.idea/
+
+# Other generated files
+*.o
+*.out
