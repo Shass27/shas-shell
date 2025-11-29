@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "functions.h"
 
 int main() {
     char* line = NULL;
@@ -24,8 +25,12 @@ int main() {
 
         if (!(strcmp(line, "exit"))) break;
 
-        //test
-        printf("%s\n", line);
+        //test tokeniser
+        char** tokens = tokenise(line);
+        for (int i=0; tokens[i]!=NULL; i++) {
+            printf("%s--", tokens[i]);
+        }
+        printf("\n");
     }
     free(line);
 }

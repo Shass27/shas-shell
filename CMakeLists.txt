@@ -6,4 +6,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Shas_Shell
         exec.c
+        functions.h
+        tokeniser.c
 )
