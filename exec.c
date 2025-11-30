@@ -25,10 +25,15 @@ int main() {
 
         if (!(strcmp(line, "exit"))) break;
 
-        //test tokeniser
+        //test parser
         char** tokens = tokenise(line);
-        for (int i=0; tokens[i]!=NULL; i++) {
-            printf("%s--", tokens[i]);
+        command command = parse(tokens);
+        printf("Given Command: %s\n", command.cmd);
+        int n = command.narg;
+        printf("Number of arguments: %d\n", n);
+        printf("Given arguments: ");
+        for (int i = 0; i < n; i++) {
+            printf("%s -- ", command.args[i]);
         }
         printf("\n");
     }

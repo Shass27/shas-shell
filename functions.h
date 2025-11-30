@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "command.h"
 
 char** tokenise(char* line);
+command parse (char** tokens);
 
 #endif
