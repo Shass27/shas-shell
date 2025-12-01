@@ -9,13 +9,14 @@ command parse(char** tokens) {
     int na=0;
     command command;
     command.cmd = malloc(strlen(tokens[0])+1);
-    strcpy(command.cmd,tokens[i++]);
+    strcpy(command.cmd,tokens[i]);
     command.args = NULL;
     while (tokens[i]!=NULL) {
-        command.args = realloc(command.args, (na+1)*sizeof(char*));
+        command.args = realloc(command.args, (na+2)*sizeof(char*));
         command.args[na] = malloc(strlen(tokens[i])+1);
         strcpy(command.args[na++], tokens[i++]);
     }
+    command.args[na] = NULL;
     command.narg = na;
     return command;
 }
