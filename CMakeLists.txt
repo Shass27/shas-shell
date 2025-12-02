@@ -10,4 +10,5 @@ add_executable(Shas_Shell
         tokeniser.c
         parser.c
         command.h
+        run.c
 )

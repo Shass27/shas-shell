@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "functions.h"
+#include "command.h"
 
 int main() {
     char* line = NULL;
@@ -9,6 +10,7 @@ int main() {
     ssize_t lread;
 
     while (1) {
+        fflush(stderr);
         printf("shas-shell> ");
         fflush(stdout);
 
@@ -25,17 +27,22 @@ int main() {
 
         if (!(strcmp(line, "exit"))) break;
 
-        //test parser
         char** tokens = tokenise(line);
         command command = parse(tokens);
-        printf("Given Command: %s\n", command.cmd);
-        int n = command.narg;
-        printf("Number of arguments: %d\n", n);
-        printf("Given arguments: ");
-        for (int i = 0; i < n; i++) {
-            printf("%s -- ", command.args[i]);
+
+        run_cmd(command.cmd, command.args);
+
+        for (int i=0; tokens[i]!=NULL; i++) {
+            free(tokens[i]);
         }
-        printf("\n");
+        free(tokens);
+        for (int i=0; command.args[i]!=NULL; i++) {
+            free(command.args[i]);
+        }
+        free(command.args);
+        free(command.cmd);
+        command.args = NULL;
+        command.cmd = NULL;
     }
     free(line);
 }
