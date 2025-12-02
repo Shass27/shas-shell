@@ -10,7 +10,6 @@ int main() {
     ssize_t lread;
 
     while (1) {
-        fflush(stderr);
         printf("shas-shell> ");
         fflush(stdout);
 
@@ -24,10 +23,11 @@ int main() {
         if (line[lread - 1] == '\n') line[lread - 1] = '\0';
 
         if (lread==1) continue;
+        char** tokens = tokenise(line);
 
+        if (tokens[0]==NULL) continue;
         if (!(strcmp(line, "exit"))) break;
 
-        char** tokens = tokenise(line);
         command command = parse(tokens);
 
         run_cmd(command.cmd, command.args);
