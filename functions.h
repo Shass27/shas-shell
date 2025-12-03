@@ -10,5 +10,5 @@ command parse (char** tokens);
 void run_cmd(char* cmd, char** args);
 int checkbuiltin(char *cmd);
 void helpcmd();
-
+void cdcmd(command command);
 #endif

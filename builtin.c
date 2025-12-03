@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "functions.h"
 #include <string.h>
+#include "unistd.h"
+#include "command.h"
 
 int checkbuiltin(char* cmd) {
     char* builtincmds[]={"cd", "help", "exit"};
@@ -21,4 +23,13 @@ void helpcmd() {
     printf("exit — exit the shell\n");
     printf("Usage: exit\n");
     printf("\n");
+}
+
+void cdcmd(command command) {
+    if (command.args[1]==NULL) chdir(getenv("HOME"));
+    else {
+        if (chdir(command.args[1])==-1) {
+            printf("cd: cannot access %s\n", command.args[1]);
+        }
+    }
 }
