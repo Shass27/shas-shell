@@ -27,22 +27,29 @@ int main() {
 
         if (tokens[0]==NULL) continue;
         if (!(strcmp(line, "exit"))) break;
-
-        command command = parse(tokens);
-
-        run_cmd(command.cmd, command.args);
-
-        for (int i=0; tokens[i]!=NULL; i++) {
-            free(tokens[i]);
+        if (checkbuiltin(tokens[0])) {
+            if (!strcmp(tokens[0], "help")) {
+                helpcmd();
+            }
+            free(tokens);
         }
-        free(tokens);
-        for (int i=0; command.args[i]!=NULL; i++) {
-            free(command.args[i]);
+        else {
+            command command = parse(tokens);
+
+            run_cmd(command.cmd, command.args);
+
+            for (int i=0; tokens[i]!=NULL; i++) {
+                free(tokens[i]);
+            }
+            free(tokens);
+            for (int i=0; command.args[i]!=NULL; i++) {
+                free(command.args[i]);
+            }
+            free(command.args);
+            free(command.cmd);
+            command.args = NULL;
+            command.cmd = NULL;
         }
-        free(command.args);
-        free(command.cmd);
-        command.args = NULL;
-        command.cmd = NULL;
     }
     free(line);
 }

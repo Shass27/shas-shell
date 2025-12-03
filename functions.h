@@ -8,4 +8,7 @@
 char** tokenise(char* line);
 command parse (char** tokens);
 void run_cmd(char* cmd, char** args);
+int checkbuiltin(char *cmd);
+void helpcmd();
+
 #endif

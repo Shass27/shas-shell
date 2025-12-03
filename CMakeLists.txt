@@ -11,4 +11,5 @@ add_executable(Shas_Shell
         parser.c
         command.h
         run.c
+        builtin.c
 )

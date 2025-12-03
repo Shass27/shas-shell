@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include "functions.h"
+#include <string.h>
+
+int checkbuiltin(char* cmd) {
+    char* builtincmds[]={"cd", "help", "exit"};
+    for (int i=0; i<3; i++) {
+        if (strcmp(cmd, builtincmds[i])==0) return 1;
+    }
+    return 0;
+}
+
+void helpcmd() {
+    printf("Apart from the system programs here are the following commands that have been built in the project:\n");
+    printf("cd — change the current working directory\n");
+    printf("Usage: cd <directory>\n");
+    printf("\n");
+    printf("help — display information about built-in commands\n");
+    printf("Usage: help\n");
+    printf("\n");
+    printf("exit — exit the shell\n");
+    printf("Usage: exit\n");
+    printf("\n");
+}
