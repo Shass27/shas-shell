@@ -11,7 +11,27 @@ int main() {
     ssize_t lread;
 
     while (1) {
-        printf("shas-shell> %s % ", getcwd(NULL, 0));
+        char *dir = malloc(1024 * sizeof(char));
+        getcwd(dir, 1024);
+        int ns = -1;
+        int len = strlen(dir);
+        dir = realloc(dir, len + 1);
+        //remove all the trailing slashes
+        while (len > 1 && dir[len-1] == '/')
+            len--;
+        for (int i = 0; i < len; i++) {
+            if (dir[i] == '/') continue;
+            if (dir[i] == '/') ns = i;
+        }
+        char *ldir = malloc(1024 * sizeof(char));
+        for (int i = ns + 1; i < len; i++) {
+            ldir[i - ns - 1] = dir[i];
+        }
+        ldir = realloc(ldir, strlen(ldir) + 1);
+        printf("shas-shell:%s> ", ldir);
+        free(ldir);
+        free(dir);
+
         fflush(stdout);
 
         lread = getline(&line, &len, stdin);
