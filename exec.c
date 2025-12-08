@@ -57,6 +57,26 @@ int main() {
         if (tokens[0]==NULL) continue;
         if (!(strcmp(line, "exit"))) break;
 
+        for (int i=1; tokens[i]!=NULL; i++) {
+            if (tokens[i][0]=='$' && tokens[i][1]!='\0') {
+                int sw = strlen(tokens[i]);
+                char* rt = malloc(sw * sizeof(char));
+                for (int j = 0; j < sw-1; j++) {
+                    rt[j] = tokens[i][j+1];
+                }
+                rt[sw-1] = '\0';
+                char* tenv = getenv(rt);
+                if (tenv == NULL) tenv = "";
+                int ntenv = strlen(tenv);
+                tokens[i] = realloc(tokens[i], ntenv + 1);
+                for (int j=0; j<ntenv; j++) {
+                    tokens[i][j] = tenv[j];
+                }
+                tokens[i][ntenv] = '\0';
+                free(rt);
+            }
+        }
+
         command command = parse(tokens);
 
         if (checkbuiltin(tokens[0])) {
