@@ -17,6 +17,9 @@ void helpcmd() {
     printf("cd — change the current working directory\n");
     printf("Usage: cd <directory>\n");
     printf("\n");
+    printf("history - show the list of commands passed so far\n");
+    printf("Usage: history\n");
+    printf("\n");
     printf("help — display information about built-in commands\n");
     printf("Usage: help\n");
     printf("\n");
