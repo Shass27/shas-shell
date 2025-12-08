@@ -74,13 +74,22 @@ int main() {
             run_cmd(command.cmd, command.args);
         }
 
+        for (int i = 0; i < ncmds; i++) {
+            free(history[i]);
+        }
+        free(history);
+        int x;
         for (int i=0; tokens[i]!=NULL; i++) {
             free(tokens[i]);
+            x=i;
         }
+        free(tokens[x+1]);
         free(tokens);
         for (int i=0; command.args[i]!=NULL; i++) {
             free(command.args[i]);
+            x=i;
         }
+        free(command.args[x+1]);
         free(command.args);
         free(command.cmd);
         command.args = NULL;
