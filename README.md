@@ -112,7 +112,7 @@ Memory Management: The shell extensively uses malloc and realloc to handle dynam
 
 Error Handling: The shell provides feedback for common errors, such as "directory not found" for cd or "cmd not found" if execvp fails to locate a binary.
 
-Refer to the Test_Casees_Report.pdf to see the unix terminal commands running.
+Refer to the Test_Cases.pdf to see the unix terminal commands running.
 
 _**6. Future Scope**_
 
