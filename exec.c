@@ -10,6 +10,9 @@ int main() {
     size_t len = 0;
     ssize_t lread;
 
+    char** history = NULL;
+    int ncmds = 0;
+
     while (1) {
         char *dir = malloc(1024 * sizeof(char));
         getcwd(dir, 1024);
@@ -44,6 +47,11 @@ int main() {
         if (line[lread - 1] == '\n') line[lread - 1] = '\0';
 
         if (lread==1) continue;
+
+        history = realloc(history, (ncmds + 1) * sizeof(char*));
+        history[ncmds] = malloc(sizeof(char)*(lread + 1));
+        strcpy(history[ncmds++], line);
+
         char** tokens = tokenise(line);
 
         if (tokens[0]==NULL) continue;
@@ -57,6 +65,9 @@ int main() {
             }
             else if (!strcmp(tokens[0], "cd")) {
                 cdcmd(command);
+            }
+            else if (!strcmp(tokens[0], "history")) {
+                historycmd(history, ncmds);
             }
         }
         else {

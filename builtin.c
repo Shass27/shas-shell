@@ -5,8 +5,8 @@
 #include "command.h"
 
 int checkbuiltin(char* cmd) {
-    char* builtincmds[]={"cd", "help", "exit"};
-    for (int i=0; i<3; i++) {
+    char* builtincmds[]={"cd", "help", "exit", "history"};
+    for (int i=0; i<4; i++) {
         if (strcmp(cmd, builtincmds[i])==0) return 1;
     }
     return 0;
@@ -31,5 +31,11 @@ void cdcmd(command command) {
         if (chdir(command.args[1])==-1) {
             printf("cd: cannot access %s\n", command.args[1]);
         }
+    }
+}
+
+void historycmd(char** history, int ncmd) {
+    for (int i=0; i<ncmd-1; i++) {
+        printf("%d %s\n", i+1, history[i]);
     }
 }
